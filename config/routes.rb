@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -49,7 +48,7 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-    namespace :admin do
+    namespace :api do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
       resources :user, :only => [:show]
