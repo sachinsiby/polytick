@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306054950) do
+ActiveRecord::Schema.define(version: 20160306150440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "presidential_events", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "state_id"
+    t.datetime "event_date"
+    t.string   "party"
+  end
 
   create_table "states", force: :cascade do |t|
     t.string  "name"
