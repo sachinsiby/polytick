@@ -17,4 +17,16 @@ FactoryGirl.define do
     association :state
     event_date { Time.now }
   end
+
+  factory :candidate do
+    name "John Bush"
+    party "Republican"
+  end
+
+  factory :delegate_stat do
+    association :state
+    association :candidate
+    count { Random.rand(100) }
+    party "Republican"
+  end
 end
