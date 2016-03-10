@@ -47,4 +47,6 @@ group :development, :test do
   gem 'spring'
 
   gem 'factory_girl_rails'
+
+  gem 'nokogiri'
 end

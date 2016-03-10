@@ -53,5 +53,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
       resources :users, :only => [:show]
       resources :states
+      resources :polls
     end
 end
