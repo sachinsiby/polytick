@@ -12,13 +12,17 @@ class PollCrawler
   def persist!
     polls.each do |p|
       pc = PollCommand.new(p)
-      pc.persist!
+      if pc.validate_and_create_poll_entity.present?
+        pc.persist!
+      end
     end
   end
 
   def persist_first!
     pc = PollCommand.new(polls.first)
-    pc.persist!
+    if pc.validate_and_create_poll_entity.present?
+      pc.persist!
+    end
   end
 
   class PollCommand
@@ -57,6 +61,16 @@ class PollCrawler
       name.split(' ')[1]
     end
 
+    def party
+      if name.include?("Republican")
+        "Republican"
+      elsif name.include?("Democratic")
+        "Democratic"
+      else
+        "Invalid"
+      end
+    end
+
     def poll_statistics
       doc.css('article.results-group').css('tr')
     end
@@ -71,10 +85,20 @@ class PollCrawler
       end
     end
 
+
+    def validate_and_create_poll_entity
+      p =  Poll.find_or_initialize_by(unique_attrs)
+      p.assign_attributes(attrs)
+
+      if p.valid?
+        @entity = p.save && p.reload
+      end
+    end
+
     private
 
     def poll_entity
-      @entity ||= Poll.create(attrs)
+      @entity
     end
 
 
@@ -85,6 +109,14 @@ class PollCrawler
         state_name: state_name,
         start_date: start_date,
         end_date: end_date,
+        party: party
+      }
+    end
+
+    def unique_attrs
+      {
+        name: name,
+        poller: poller
       }
     end
 
@@ -131,8 +163,7 @@ class PollCrawler
   end
 end
 
-Poll.destroy_all
-PollStatistic.destroy_all
-
-doc = Nokogiri::HTML(open("http://www.politico.com/polls/#.VuEDuWwVhBc"))
-PollCrawler.new(doc).persist!
+for i in 1..25
+  doc = Nokogiri::HTML(open("http://www.politico.com/polls/?page=#{i}"))
+  PollCrawler.new(doc).persist!
+end
