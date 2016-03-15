@@ -163,7 +163,8 @@ class PollCrawler
   end
 end
 
-for i in 1..25
-  doc = Nokogiri::HTML(open("http://www.politico.com/polls/?page=#{i}"))
-  PollCrawler.new(doc).persist!
-end
+#Uncomment later
+# for i in 1..25
+#   doc = Nokogiri::HTML(open("http://www.politico.com/polls/?page=#{i}"))
+#   PollCrawler.new(doc).persist!
+# end

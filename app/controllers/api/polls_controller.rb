@@ -11,7 +11,7 @@ module Api
     private
 
     def collection
-      Poll.all
+      Poll.ascending
     end
   end
 end
