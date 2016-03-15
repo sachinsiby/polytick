@@ -84,7 +84,7 @@ class PollCrawler
       p =  Poll.find_or_initialize_by(unique_attrs)
       p.assign_attributes(attrs)
 
-      if p.valid?
+      if p.valid? and !name.include?('Senate')
         @entity = p.save && p.reload
       end
     end
