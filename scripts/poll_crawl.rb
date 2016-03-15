@@ -18,13 +18,6 @@ class PollCrawler
     end
   end
 
-  def persist_first!
-    pc = PollCommand.new(polls.first)
-    if pc.validate_and_create_poll_entity.present?
-      pc.persist!
-    end
-  end
-
   class PollCommand
     attr_reader :doc
 
@@ -54,7 +47,7 @@ class PollCrawler
     end
 
     def poller
-      doc.css('p').first.css('a').first.children.first.to_s.strip
+      doc.css('p.byline').first.css('a').first.children.first.to_s.strip
     end
 
     def state_name
@@ -80,9 +73,10 @@ class PollCrawler
     end
 
     def persist!
-      poll_statistics.map  do |ps|
-        poll_entity.poll_statistics.create(PollStatisticCommand.new(ps).attrs)
+      children = poll_statistics.map  do |ps|
+        PollStatistic.new(PollStatisticCommand.new(ps).attrs)
       end
+      poll_entity.poll_statistics.replace(children)
     end
 
 
@@ -163,8 +157,9 @@ class PollCrawler
   end
 end
 
-#Uncomment later
-# for i in 1..25
-#   doc = Nokogiri::HTML(open("http://www.politico.com/polls/?page=#{i}"))
-#   PollCrawler.new(doc).persist!
-# end
+for i in 1..25
+  url = "http://www.politico.com/polls/?page=#{i}"
+  puts url
+  doc = Nokogiri::HTML(open(url))
+  PollCrawler.new(doc).persist!
+end
