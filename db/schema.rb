@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313204356) do
+ActiveRecord::Schema.define(version: 20160329024952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,21 @@ ActiveRecord::Schema.define(version: 20160313204356) do
     t.integer  "state_id"
     t.datetime "event_date"
     t.string   "party"
+  end
+
+  create_table "result_statistics", force: :cascade do |t|
+    t.integer "result_id"
+    t.string  "candidate_name"
+    t.decimal "percentage"
+    t.integer "num_delegates"
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.string   "name",                null: false
+    t.string   "party",               null: false
+    t.string   "state",               null: false
+    t.datetime "date",                null: false
+    t.string   "delegates_allocated"
   end
 
   create_table "states", force: :cascade do |t|

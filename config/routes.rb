@@ -51,8 +51,8 @@ Rails.application.routes.draw do
     namespace :api, defaults: { format: :json} do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
-      resources :users, :only => [:show]
       resources :states
       resources :polls
+      resources :results
     end
 end
