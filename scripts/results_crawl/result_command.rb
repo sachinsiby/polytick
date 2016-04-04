@@ -76,8 +76,20 @@ module ResultsCrawl
         @doc = doc
       end
 
+      def candidates_map
+        {
+          'D. Trump': 'Donald Trump',
+          'T. Cruz':  'Ted Cruz',
+          'M. Rubio': 'Marco Rubio',
+          'H. Clinton': 'Hillary Clinton',
+          'B. Sanders': 'Bernie Sanders',
+          'Uncommitted': 'Uncommitted'
+        }
+      end
+
+
       def candidate_name
-        @doc.css('span.name-combo').children.last.text.strip
+        candidates_map.with_indifferent_access[@doc.css('span.name-combo').children.last.text.strip] || "Other"
       end
 
       def percentage
