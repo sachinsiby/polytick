@@ -81,9 +81,9 @@ module ResultsCrawl
           'D. Trump': 'Donald Trump',
           'T. Cruz':  'Ted Cruz',
           'M. Rubio': 'Marco Rubio',
+          'J. Kasich': 'John Kasich',
           'H. Clinton': 'Hillary Clinton',
           'B. Sanders': 'Bernie Sanders',
-          'Uncommitted': 'Uncommitted'
         }
       end
 
