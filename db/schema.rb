@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404010934) do
+ActiveRecord::Schema.define(version: 20160404023506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20160404010934) do
     t.string "party"
     t.string "image_url"
     t.text   "policies",  default: "[]"
+    t.string "blob"
+    t.string "subtitle"
   end
 
   create_table "poll_statistics", force: :cascade do |t|
