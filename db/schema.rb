@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329024952) do
+ActiveRecord::Schema.define(version: 20160404010934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,13 +22,6 @@ ActiveRecord::Schema.define(version: 20160329024952) do
     t.string "party"
     t.string "image_url"
     t.text   "policies",  default: "[]"
-  end
-
-  create_table "delegate_stats", force: :cascade do |t|
-    t.integer "state_id"
-    t.integer "candidate_id"
-    t.string  "party"
-    t.integer "count"
   end
 
   create_table "poll_statistics", force: :cascade do |t|
@@ -46,13 +39,6 @@ ActiveRecord::Schema.define(version: 20160329024952) do
     t.string   "party"
   end
 
-  create_table "presidential_events", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "state_id"
-    t.datetime "event_date"
-    t.string   "party"
-  end
-
   create_table "result_statistics", force: :cascade do |t|
     t.integer "result_id"
     t.string  "candidate_name"
@@ -67,19 +53,5 @@ ActiveRecord::Schema.define(version: 20160329024952) do
     t.datetime "date",                null: false
     t.string   "delegates_allocated"
   end
-
-  create_table "states", force: :cascade do |t|
-    t.string  "name"
-    t.integer "max_republican_delegates"
-    t.integer "max_democratic_delegates"
-  end
-
-  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string "email"
-    t.string "name"
-    t.string "party", default: "Independent"
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
 end

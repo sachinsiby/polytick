@@ -1,5 +1,61 @@
 require 'open-uri'
 
+STATES = [ "Alaska",
+          "Alabama",
+          "Arkansas",
+          "American Samoa",
+          "Arizona",
+          "California",
+          "Colorado",
+          "Connecticut",
+          "District of Columbia",
+          "Delaware",
+          "Florida",
+          "Georgia",
+          "Guam",
+          "Hawaii",
+          "Iowa",
+          "Idaho",
+          "Illinois",
+          "Indiana",
+          "Kansas",
+          "Kentucky",
+          "Louisiana",
+          "Massachusetts",
+          "Maryland",
+          "Maine",
+          "Michigan",
+          "Minnesota",
+          "Missouri",
+          "Mississippi",
+          "Montana",
+          "North Carolina",
+          "North Dakota",
+          "Nebraska",
+          "New Hampshire",
+          "New Jersey",
+          "New Mexico",
+          "Nevada",
+          "New York",
+          "Ohio",
+          "Oklahoma",
+          "Oregon",
+          "Pennsylvania",
+          "Puerto Rico",
+          "Rhode Island",
+          "South Carolina",
+          "South Dakota",
+          "Tennessee",
+          "Texas",
+          "Utah",
+          "Virginia",
+          "Virgin Islands",
+          "Vermont",
+          "Washington",
+          "Wisconsin",
+          "West Virginia",
+          "Wyoming"]
+
 class PollCrawler
   def initialize(url)
     @doc = url
@@ -51,7 +107,9 @@ class PollCrawler
     end
 
     def state_name
-      name.split(' ')[1]
+      state = ""
+      STATES.any? { |word| name.include?(word) ? state = word : false }
+      state
     end
 
     def party
@@ -84,7 +142,7 @@ class PollCrawler
       p =  Poll.find_or_initialize_by(unique_attrs)
       p.assign_attributes(attrs)
 
-      if p.valid? and !name.include?('Senate')
+      if p.valid? && !name.include?('Senate') && state_name != ""
         @entity = p.save && p.reload
       end
     end
