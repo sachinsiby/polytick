@@ -33,7 +33,7 @@ Candidate.create({
 })
 
 Candidate.create({
-  name: "Hilary Clinton",
+  name: "Hillary Clinton",
   party: "Democratic",
   subtitle: "Democrat | Secretary of State",
   blob: "Hillary Clinton is a politician who holds degrees from Wellesly College and Yale Law School. She has served as the United States Secretary of State, a United States Senator, and the First Lady of the United States. She has also been a partner at Rose Law Firm, and a board member at various public corporations. She was a Democratic candidate for the 2008 election against President Obama",
