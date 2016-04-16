@@ -54,7 +54,9 @@ STATES = [ "Alaska",
           "Washington",
           "Wisconsin",
           "West Virginia",
-          "Wyoming"]
+          "Wyoming",
+          ""
+        ]
 
 class PollCrawler
   def initialize(url)
@@ -142,7 +144,7 @@ class PollCrawler
       p =  Poll.find_or_initialize_by(unique_attrs)
       p.assign_attributes(attrs)
 
-      if p.valid? && !name.include?('Senate') && state_name != ""
+      if p.valid? && !name.include?('Senate')
         @entity = p.save && p.reload
       end
     end
