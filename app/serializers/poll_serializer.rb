@@ -13,6 +13,6 @@ class PollSerializer < ActiveModel::Serializer
   end
 
   def relevent_candidates
-    ["Donald Trump", "John Kasich", "Marco Rubio", "Ted Cruz", "Ben Carson", "Hillary Clinton", "Bernie Sanders"]
+    ["Donald Trump", "John Kasich", "Marco Rubio", "Ted Cruz", "Hillary Clinton", "Bernie Sanders"]
   end
 end
