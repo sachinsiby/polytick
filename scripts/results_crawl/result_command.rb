@@ -96,7 +96,7 @@ module ResultsCrawl
 
 
       def candidate_name
-        candidates_map.with_indifferent_access[@doc.css('span.name-combo').children.last.text.strip] || "Other"
+        candidates_map.with_indifferent_access[@doc.css('span.name-combo').children.last.text.strip] || "Others"
       end
 
       def percentage

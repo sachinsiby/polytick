@@ -1,12 +1,11 @@
 class PollSerializer < ActiveModel::Serializer
   attributes :name, :poller, :party, :state_name, :start_date, :end_date
-  #has_many :poll_statistics, serializer: PollStatisticSerializer
   attributes :poll_statistics
 
   def poll_statistics
     grouped_candidates = object.poll_statistics.group_and_sum.map do |k, v|
       {
-        'candidate_name': k.presence || "Other",
+        'candidate_name': k.presence || "Others",
         'percentage': v
       }
     end
