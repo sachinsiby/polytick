@@ -6,6 +6,8 @@ module ResultsCrawl
       doc.css('.election-results article.timeline-group').each do |state|
         ResultsCrawl::ResultCommand.new(state).persist!
       end
+      ResultsCrawl::UpdateWrongResults.new().update!
+      ResultsCrawl::UpdateWrongResults.new().update_iowa!
     end
   end
 end

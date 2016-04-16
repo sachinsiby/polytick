@@ -1,5 +1,6 @@
 require_relative '../../scripts/results_crawl/crawl.rb'
 require_relative '../../scripts/results_crawl/result_command.rb'
+require_relative '../../scripts/results_crawl/update_wrong_results.rb'
 
 namespace :crawl do
   desc 'This is for crawling results info'
