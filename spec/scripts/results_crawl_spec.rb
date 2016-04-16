@@ -24,6 +24,7 @@ RSpec.describe ResultsCrawl::ResultCommand do
         expect(democratic_attrs[:state]).to eq('Alabama')
         expect(democratic_attrs[:date]).to eq(Date.parse('March 1, 2016'))
         expect(democratic_attrs[:party]).to eq('Democratic')
+        expect(democratic_attrs[:reporting_percentage]).to eq(100)
         expect(democratic_attrs[:delegates_allocated]).to eq('56/60')
       end
       it 'sets them correctly for the Republican party' do
@@ -32,6 +33,7 @@ RSpec.describe ResultsCrawl::ResultCommand do
         expect(republican_attrs[:state]).to eq('Alabama')
         expect(republican_attrs[:date]).to eq(Date.parse('March 1, 2016'))
         expect(republican_attrs[:party]).to eq('Republican')
+        expect(republican_attrs[:reporting_percentage]).to eq(100)
         expect(republican_attrs[:delegates_allocated]).to eq('50/50')
       end
     end
@@ -78,6 +80,14 @@ RSpec.describe ResultsCrawl::ResultCommand do
       expect(party_attrs.length).to eq(2)
       democratic_attrs = party_attrs[0]
       expect(democratic_attrs[:delegates_allocated]).to eq("")
+    end
+
+    it "sets reporting percentage for pending results correctly" do
+      expect(party_attrs.length).to eq(2)
+      democratic_attrs = party_attrs[0]
+      republican_attrs = party_attrs[1]
+      expect(democratic_attrs[:reporting_percentage]).to eq(0)
+      expect(republican_attrs[:reporting_percentage]).to eq(100)
     end
 
     context 'persistence' do

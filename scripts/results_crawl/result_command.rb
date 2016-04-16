@@ -10,19 +10,25 @@ module ResultsCrawl
 
     def party_attrs
       @doc.css('.results-data').map.with_index do | party_result_doc, index |
-        name  = parse_attribute(@doc.css('h4>a'), index)
-        state = parse_attribute(@doc.css('h3>a'), index)
-        date  = parse_attribute(@doc.css('p.timestamp'), index)
-        party = @doc.css('.title>h5')[index].text
+        name                  = parse_attribute(@doc.css('h4>a'), index)
+        state                 = parse_attribute(@doc.css('h3>a'), index)
+        date                  = parse_attribute(@doc.css('p.timestamp'), index)
+        party                 = @doc.css('.title>h5')[index].text
 
-
-        PartyResultEntity.new(party_result_doc, { name: name, date: date, party: party, state: state }).attrs
+        PartyResultEntity.new(party_result_doc, { name: name, date: date, party: party,
+           state: state, reporting_percentage: reporting_percentage(index) }).attrs
       end
+    end
+
+    def reporting_percentage(index)
+      percent_string = @doc.css('.results-meta')[index].css('.title>p')
+      percent_string && percent_string.text.split(" ")[0].to_f
     end
 
     def parse_attribute(node, index)
       node.length > 1 ? node[index].text.strip : node.text.strip
     end
+
 
     def persist!
       party_attrs.each do |attrs|
@@ -65,6 +71,7 @@ module ResultsCrawl
           state: @opts[:state],
           date: Date.parse(date),
           delegates_allocated: delegates_allocated,
+          reporting_percentage: @opts[:reporting_percentage],
           result_statistics: result_statistics
         }
       end
