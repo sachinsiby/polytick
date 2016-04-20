@@ -1,5 +1,5 @@
 class ResultSerializer < ActiveModel::Serializer
-  attributes :name, :state, :party, :date, :delegates_allocated
+  attributes :name, :state, :party, :date, :delegates_allocated, :reporting_percentage
   attributes :result_statistics#, each_serializer: ResultStatisticSerializer
 
   def result_statistics
