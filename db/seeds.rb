@@ -25,11 +25,11 @@ Candidate.create({
 })
 
 Candidate.create({
-  name: "Marco Rubio",
+  name: "John Kasich",
   party: "Republican",
-  subtitle: "Republican | Senator, Florida",
-  blob: "Marco Rubio is an attorney, politician and the junior United States Senator from Florida. He holds degrees from the University of Florida and the University of Miami School of Law. He has previously served as the Speaker of the Florida House of Representatives, City Commissioner for West Miami, and the Florida House Majority Leader.",
-  policies:  ["Repeal Affordable Care Act", "Repeal Estate Tax", "Cut Tax for Small Businesses", "Stop Eminent Domain abuse", "Approve Keystone XL Pipeline", "Deport criminal illegal aliens", "Build walls along Mexican border"],
+  subtitle: "Republican | Governor, Ohio",
+  blob: "John Kasich is a former investment banker turned politician. He has served nine terms as a member in the House of Representatives on behalf of Ohio's 12th congressional district. During his time there, he served for 18 years on the House Armed Services Committee and 6 years as the chairman of the House Budget Committee. He holds a Bachelor of Arts degree from Ohio State University, and went on to be the managing director of Lehman Brother's office in Ohio.",
+  policies:  ["Balance the budget", "Tax cuts for individuals, families and businesses", "Approve Keystone XL Pipeline", "Reform US Department of Commerce", "Reform regulations to make it easier for businesses"],
 })
 
 Candidate.create({
