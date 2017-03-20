@@ -12,8 +12,11 @@ RSpec.describe ResultsCrawl::ResultCommand do
     end
 
     it 'returns results for both Republican and Democratic parties' do
-      expect(party_attrs.length).to eq(2)
-      parties = party_attrs.map{|p| p[:party] }
+      expect(
+        party_attrs.length).to
+         eq(2)
+      parties = 
+        party_attrs.map{|p| p[:party] }
       expect(parties).to match_array(['Republican', 'Democratic'])
     end
 
